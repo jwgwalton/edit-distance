@@ -37,8 +37,8 @@ def damerau_levenshtein_distance(string1, string2):
     for j in range(n+1):
         distance_matrix[0, j] = j  # As above distance from any string1  to empty string2 would be j delections
 
-    for j in range(1, n+1):
-        for i in range(1, m+1):
+    for i in range(1, n+1):
+        for j in range(1, m+1):
 
             if string1[i-1] == string2[j-1]:
                 cost = 0
@@ -54,7 +54,7 @@ def damerau_levenshtein_distance(string1, string2):
                 distance_matrix[i-1, j-1] + cost,  # substitution
             )
 
-            if i > 1 and j > 1 and string1[i] == string2[j-1] and string1[i-1] == string2[j]:  # could we tranpose them?
+            if i > 2 and j > 2 and string1[i] == string2[j-1] and string1[i-1] == string2[j]:  # could we tranpose them?
                 distance_matrix[i, j] = min(
                     distance_matrix[i, j],
                     distance_matrix[i-2, j-2] + cost  # transposition
